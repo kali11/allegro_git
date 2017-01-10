@@ -6,9 +6,11 @@ import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
+import javax.ws.rs.core.Context;
 
-public class
-GithubRestApplication extends ResourceConfig {
+public class GithubRestApplication extends ResourceConfig {
+
     @Inject
     public GithubRestApplication(ServiceLocator serviceLocator) {
         packages(true, "org.piotr.github");

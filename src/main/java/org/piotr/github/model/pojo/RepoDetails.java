@@ -1,11 +1,6 @@
 package org.piotr.github.model.pojo;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
-import java.util.Date;
-
-@JsonDeserialize(using = RepoDetailsDeserializer.class)
 public class RepoDetails {
     private String name;
     private String description;

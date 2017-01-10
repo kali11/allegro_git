@@ -1,35 +1,19 @@
 package org.piotr.github.model.pojo;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
+import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Date;
-import java.util.Locale;
 
-public class RepoDetailsDeserializer extends StdDeserializer<RepoDetails> {
-
-    public RepoDetailsDeserializer() {
-        this(null);
-    }
-
-    public RepoDetailsDeserializer(Class<?> vc) {
-        super(vc);
-    }
+public class RepoDetailsDeserializer extends JsonDeserializer<RepoDetails> {
 
     @Override
-    public RepoDetails deserialize(JsonParser jp, DeserializationContext deserializationContext) throws IOException, JsonProcessingException {
+    public RepoDetails deserialize(JsonParser jp, DeserializationContext deserializationContext) throws IOException {
         RepoDetails repoDetails = new RepoDetails();
         JsonNode node = jp.getCodec().readTree(jp);
         repoDetails.setName(node.get("full_name").asText());

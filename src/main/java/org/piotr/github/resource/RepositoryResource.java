@@ -4,13 +4,14 @@ import org.apache.log4j.Logger;
 import org.piotr.github.model.pojo.RepoDetails;
 import org.piotr.github.model.service.GitHubRepositoryService;
 import org.piotr.github.model.service.RepositoryService;
-import org.piotr.github.utils.PropertiesReader;
 
 import javax.inject.Inject;
+import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import java.io.InputStream;
 import java.util.Properties;
@@ -21,11 +22,14 @@ import java.util.Properties;
 @Path("repositories")
 public class RepositoryResource {
 
+    @Context
+    ServletContext servletContext;
+
     @Inject
     private RepositoryService repositoryService;
 
-    @Inject
-    private PropertiesReader propertiesReader;
+    //@Inject
+    //private PropertiesReader propertiesReader;
 
     private Logger logger = Logger.getLogger(getClass().getName());
 
