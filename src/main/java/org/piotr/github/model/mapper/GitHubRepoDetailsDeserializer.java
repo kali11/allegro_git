@@ -1,16 +1,17 @@
-package org.piotr.github.model.pojo;
+package org.piotr.github.model.mapper;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import org.piotr.github.model.pojo.RepoDetails;
 
 import java.io.IOException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
-public class RepoDetailsDeserializer extends JsonDeserializer<RepoDetails> {
+public class GitHubRepoDetailsDeserializer extends JsonDeserializer<RepoDetails> {
 
     @Override
     public RepoDetails deserialize(JsonParser jp, DeserializationContext deserializationContext) throws IOException {

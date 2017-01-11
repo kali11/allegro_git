@@ -9,10 +9,10 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.Context;
 
-public class GithubRestApplication extends ResourceConfig {
+public class GitHubRestApplication extends ResourceConfig {
 
     @Inject
-    public GithubRestApplication(ServiceLocator serviceLocator) {
+    public GitHubRestApplication(ServiceLocator serviceLocator) {
         packages(true, "org.piotr.github");
         GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
         GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);

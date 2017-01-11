@@ -22,16 +22,8 @@ import java.util.Properties;
 @Path("repositories")
 public class RepositoryResource {
 
-    @Context
-    ServletContext servletContext;
-
     @Inject
     private RepositoryService repositoryService;
-
-    //@Inject
-    //private PropertiesReader propertiesReader;
-
-    private Logger logger = Logger.getLogger(getClass().getName());
 
     @GET
     @Path("/{owner}/{repository-name}")

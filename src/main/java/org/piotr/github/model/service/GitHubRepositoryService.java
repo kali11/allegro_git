@@ -1,15 +1,11 @@
 package org.piotr.github.model.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.piotr.github.model.github.GitHubConnector;
-import org.piotr.github.model.github.VCSConnector;
+import org.piotr.github.model.connector.GitHubConnector;
 import org.piotr.github.model.pojo.RepoDetails;
-import org.piotr.github.model.pojo.RepoDetailsDeserializer;
+import org.piotr.github.utils.PropertiesReader;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.ws.rs.core.Response;
 
 @Singleton
 public class GitHubRepositoryService implements RepositoryService {
@@ -17,14 +13,17 @@ public class GitHubRepositoryService implements RepositoryService {
     @Inject
     private GitHubConnector connector;
 
+    private final String apiUrl;
+    private final String repoPath;
+
+    @Inject
+    public GitHubRepositoryService(PropertiesReader propertiesReader) {
+        apiUrl = propertiesReader.getProperty("api.url");
+        repoPath = propertiesReader.getProperty("api.repoPath");
+    }
+
     @Override
     public RepoDetails getRepositoryDetails(String owner, String repoName) {
-        Response response = connector.getRepositoryDetails(owner, repoName);
-        //ObjectMapper objectMapper = new ObjectMapper();
-        //SimpleModule module = new SimpleModule();
-        //module.addDeserializer(RepoDetails.class, new RepoDetailsDeserializer());
-        //objectMapper.registerModule(module);
-        //objectMapper.readValue(response.re, RepoDetails.class);
-        return response.readEntity(RepoDetails.class);
+        return connector.getRepositoryDetails(apiUrl, repoPath, owner, repoName);
     }
 }
