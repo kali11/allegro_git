@@ -1,19 +1,21 @@
 package org.piotr.github.model.pojo;
 
-
+/**
+ * POJO class that defines pieces of information that we want to acquire
+ */
 public class RepoDetails {
-    private String name;
+    private String fullName;
     private String description;
     private String cloneUrl;
-    private Long stargazers;
-    private String creationDate;
+    private Long stars;
+    private String createdAt;
 
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getDescription() {
@@ -32,19 +34,19 @@ public class RepoDetails {
         this.cloneUrl = cloneUrl;
     }
 
-    public Long getStargazers() {
-        return stargazers;
+    public Long getStars() {
+        return stars;
     }
 
-    public void setStargazers(Long stargazers) {
-        this.stargazers = stargazers;
+    public void setStars(Long stars) {
+        this.stars = stars;
     }
 
-    public String getCreationDate() {
-        return creationDate;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreationDate(String creationDate) {
-        this.creationDate = creationDate;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 }

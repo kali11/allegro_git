@@ -11,13 +11,17 @@ import org.piotr.github.utils.PropertiesReader;
 import javax.servlet.ServletContextEvent;
 import java.io.InputStream;
 
+/**
+ * Google Guice configuration class
+ */
 public class GuiceServletConfig extends GuiceServletContextListener {
-    public static Injector injector;
+    private static final String PROPERTIES_FILE = "/WEB-INF/config.properties";
     private PropertiesReader propertiesReader;
+    public static Injector injector;
 
     @Override
     public void contextInitialized(ServletContextEvent context) {
-        InputStream in = context.getServletContext().getResourceAsStream("/WEB-INF/config.properties");
+        InputStream in = context.getServletContext().getResourceAsStream(PROPERTIES_FILE);
         propertiesReader = new PropertiesReader(in);
         super.contextInitialized(context);
     }
@@ -27,16 +31,11 @@ public class GuiceServletConfig extends GuiceServletContextListener {
         injector = Guice.createInjector(new ServletModule() {
             @Override
             public void configureServlets() {
+                // here we can define guice bindings
                 bind(RepositoryService.class).to(GitHubRepositoryService.class);
-                //bind(GitHubConnector.class).toInstance(supplyGitHubConnector());
                 bind(PropertiesReader.class).toInstance(propertiesReader);
             }
         });
         return injector;
     }
-
-//    private GitHubConnector supplyGitHubConnector() {
-//        GitHubConnector gitHubConnector = new GitHubConnector(properties.getProperty("api.url"));
-//        return gitHubConnector;
-//    }
 }

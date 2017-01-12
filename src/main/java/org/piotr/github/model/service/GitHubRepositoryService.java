@@ -7,6 +7,9 @@ import org.piotr.github.utils.PropertiesReader;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+/**
+ * A class that is a service for acquiring data about GitHub respositories
+ */
 @Singleton
 public class GitHubRepositoryService implements RepositoryService {
 
@@ -22,6 +25,12 @@ public class GitHubRepositoryService implements RepositoryService {
         repoPath = propertiesReader.getProperty("api.repoPath");
     }
 
+    /**
+     * Returns GitHub repository details
+     * @param owner - repository's owner
+     * @param repoName - repository's name
+     * @return RepoDetails
+     */
     @Override
     public RepoDetails getRepositoryDetails(String owner, String repoName) {
         return connector.getRepositoryDetails(apiUrl, repoPath, owner, repoName);

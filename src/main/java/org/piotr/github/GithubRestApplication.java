@@ -9,6 +9,9 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.ws.rs.core.Context;
 
+/**
+ * Jersey configuration class
+ */
 public class GitHubRestApplication extends ResourceConfig {
 
     @Inject

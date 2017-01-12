@@ -1,20 +1,18 @@
 package org.piotr.github.resource;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.piotr.github.model.mapper.DeserializationException;
 import org.piotr.github.model.pojo.RepoDetails;
-import org.piotr.github.model.service.GitHubRepositoryService;
 import org.piotr.github.model.service.RepositoryService;
 
 import javax.inject.Inject;
-import javax.servlet.ServletContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import java.io.InputStream;
-import java.util.Properties;
+import javax.ws.rs.core.Response;
 
 /**
  * Root VCS repositories resource.
@@ -22,14 +20,30 @@ import java.util.Properties;
 @Path("repositories")
 public class RepositoryResource {
 
+    private final Logger logger = LogManager.getLogger(getClass().getName());
+
     @Inject
     private RepositoryService repositoryService;
 
+    /**
+     * Returns detailed information about specific VCS repository
+     * @param owner - repository's owner
+     * @param repositoryName - repository's name
+     * @return RepoDetails
+     */
     @GET
     @Path("/{owner}/{repository-name}")
     @Produces(MediaType.APPLICATION_JSON)
-    public RepoDetails getIt(@PathParam("owner") String owner,
+    public Response getIt(@PathParam("owner") String owner,
                              @PathParam("repository-name") String repositoryName) {
-        return repositoryService.getRepositoryDetails(owner, repositoryName);
+        Response response;
+        try {
+            RepoDetails repoDetails = repositoryService.getRepositoryDetails(owner, repositoryName);
+            response = Response.ok(repoDetails, MediaType.APPLICATION_JSON).build();
+        } catch (DeserializationException e) {
+            logger.warn("cannot deserialize response from repo API. Response {}", e.getResponse());
+            response = Response.noContent().build();
+        }
+        return response;
     }
 }

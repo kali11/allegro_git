@@ -9,6 +9,9 @@ import org.piotr.github.model.pojo.RepoDetails;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
+/**
+ * This is a provider for GitHubRepoDetailsDeserializer
+ */
 @Provider
 public class GitHubJacksonObjectMapperProvider implements ContextResolver<ObjectMapper> {
     final ObjectMapper defaultObjectMapper;
