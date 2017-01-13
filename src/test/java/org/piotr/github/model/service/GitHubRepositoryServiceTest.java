@@ -16,6 +16,9 @@ import org.piotr.github.utils.PropertiesReader;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
+/**
+ * Unit test of GitHubRepositoryService
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class GitHubRepositoryServiceTest {
 

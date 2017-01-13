@@ -3,7 +3,6 @@ package org.piotr.github.model.connector;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.piotr.github.model.mapper.DeserializationException;
 import org.piotr.github.model.mapper.GitHubJacksonObjectMapperProvider;
 import org.piotr.github.model.pojo.RepoDetails;
 

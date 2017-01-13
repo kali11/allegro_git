@@ -2,7 +2,7 @@ package org.piotr.github.resource;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.piotr.github.model.mapper.DeserializationException;
+import org.piotr.github.model.mapper.GitHubRepositoryNotFoundException;
 import org.piotr.github.model.pojo.RepoDetails;
 import org.piotr.github.model.service.RepositoryService;
 
@@ -40,8 +40,9 @@ public class RepositoryResource {
         try {
             RepoDetails repoDetails = repositoryService.getRepositoryDetails(owner, repositoryName);
             response = Response.ok(repoDetails, MediaType.APPLICATION_JSON).build();
-        } catch (DeserializationException e) {
-            logger.warn("cannot deserialize response from repo API. Response {}", e.getResponse());
+        } catch (GitHubRepositoryNotFoundException e) {
+            logger.warn("cannot find repository: {} for owner: {}. Response from API: {}",
+                    repositoryName,  owner, e.getMessage());
             response = Response.noContent().build();
         }
         return response;
